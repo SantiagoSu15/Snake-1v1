@@ -180,4 +180,8 @@ export class snake implements Movible{
     getIsDead():boolean{
       return this.isDead;
     }
+
+    getInputdirection(){
+      return this.inputDirection;
+    }
 };

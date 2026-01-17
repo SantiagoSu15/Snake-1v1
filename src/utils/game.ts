@@ -74,7 +74,7 @@ export class game{
         this.spawnFruit();
         this.collisionManager.update();
     
-        this.snakes.forEach((sna, index) => {
+        this.snakes.forEach((sna) => {
     
             if (sna.getIsDead()) return;
     

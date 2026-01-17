@@ -1,5 +1,4 @@
 import {snakeNode} from "./snakeNode.js"
-import { fruit } from "../Fruta/fruit"
 import type { Vector } from "../Movimiento/vector.js";
 
 

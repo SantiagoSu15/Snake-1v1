@@ -6,7 +6,7 @@ import type { Vector } from "./vector";
 //instante
 //velocidad = vector de velocidad / magnitud del vector de velocidad
 export class LinearMovement extends MovementStrategy {
-    calculateVelocity(v: Vector, cV: Vector, time: number): Vector {
+    calculateVelocity(v: Vector): Vector {
       const sizeVector = Math.sqrt(v.x ** 2 + v.y ** 2);
 
       if (sizeVector === 0) {

@@ -1,22 +1,10 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import { snake } from "../utils/Serpiente/snake";
 import TableroComponent from "../components/tablero";
 import { useSnakeMovement } from "./playerMovement";
-import { System } from "check2d";
 import  { game } from "../utils/game";
 
 
-const system = new System();
-const s = new snake(system,{x:5,y:5},1,50);
-s.grow();
-s.grow();
-s.grow();
-s.grow();
-
-const s2 = new snake(system,{x:25,y:25},1,50);
-s2.grow();
-s2.grow();
 
 
 export const GameCom = () => {
@@ -72,5 +60,5 @@ export const GameCom = () => {
         };
     }, [gameInstance]);
     
-    return <TableroComponent snakeList={entities.snakes} fruitList={entities.fruits}/>;
+    return <TableroComponent snakeList={entities.snakes} fruitList={entities.fruits} size={boardSize}/>;
 };
