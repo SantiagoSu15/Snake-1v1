@@ -158,10 +158,10 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     transition: background-image 0.3s;
-    }
+  }
 
-  .iconButtonMenu:hover {
-      background-image: url('/serpiente.gif');
+  .ModeMenuButton:hover .iconButtonMenu {
+    background-image: url('/serpiente.gif');
   }
 
 

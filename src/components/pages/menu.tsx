@@ -8,19 +8,19 @@ export const Menu = ()=>{
                 <Link to="/Snake-1v1/singleplayer">
                     <button className='ModeMenuButton'>
                         <div className="iconButtonMenu" />
-                            <span> Single Player</span> 
+                        <span> Single Player</span> 
                     </button>
                 </Link>
                 <Link to="/Snake-1v1/Multi-local">
                     <button className='ModeMenuButton'>
                         <div className="iconButtonMenu" />
-                            <span> Multi Local</span> 
+                        <span> Multi Local</span> 
                     </button>
                 </Link>
                 <Link to="/Snake-1v1/Multi-online">
                     <button className='ModeMenuButton'>
                         <div className="iconButtonMenu" />
-                            <span> Multi Online</span> 
+                        <span> Multi Online</span> 
                     </button>
                 </Link>
                 </div>
