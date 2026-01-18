@@ -123,47 +123,90 @@ body{
   }
  
 
-  .ModeMenuButton{
-    cursor: pointer;
+  .ModeMenuButton {
     width: 100%;
     aspect-ratio: 1/1;
+    position: relative;
+    align-self: center;
+    background-color: #EDE8D0;
+    background-image: none;
+    background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #41403e;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    border-radius: 10px;
-
-    gap: 5%;
-  }
-  
-  .ModeMenuButton:hover,
-  .ModeMenuButton:focus,
-  .ModeMenuButton:active {
-    background: transparent;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 23px;
     outline: none;
+    padding: clamp(0.5rem, 2vw, 0.75rem);
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    gap: 5%;
+
   }
   
+  .ModeMenuButton:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+  }
+  
+  .ModeMenuButton:focus {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  }
   
   
 
   .iconButtonMenu {
     width: 80%;
     height: 70%;
-    background-image: url('/serpiente_static.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     transition: background-image 0.3s;
   }
 
-  .ModeMenuButton:hover .iconButtonMenu {
+  
+
+
+  #SingleButton{
+    background-image: url('/serpiente_static.png');
+  }
+
+  .ModeMenuButton:hover  #SingleButton{
     background-image: url('/serpiente.gif');
   }
 
+  #LocalButton{
+    background-image: url('/serpiente_Local_static.png');
+  }
+
+  .ModeMenuButton:hover #LocalButton{
+    background-image: url('/serpiente_Local.gif');
+  }
+
+  #MultiButton{
+    background-image: url('/serpiente_Multi_static.png');
+  }
+
+  .ModeMenuButton:hover    #MultiButton{
+    background-image: url('/serpiente_Multi.gif');
+  }
 
   .atribucion {
     font-size: 6px;
