@@ -30,7 +30,7 @@ export const useGameLoop = (callback: GameLoopCallback) =>{
             animationRef.current = requestAnimationFrame(loop);
         };
 
-        animationRef.current = requestAnimationFrame(loop);
+        animationRef.current = requestAnimationFrame(loop); //incia el loop de manera recurrente llamandao infinitamente el callback del useSnake q mueve y llama al notify q le dice a react q hay q re-rendizar para actualizar la snake
 
         return () => {
             if (animationRef.current) {

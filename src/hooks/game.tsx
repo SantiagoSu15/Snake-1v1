@@ -4,14 +4,15 @@ import TableroComponent from "../components/tablero";
 import { useSnakeMovement } from "./playerMovement";
 import  { game } from "../utils/game";
 
+export type gameInfo ={
+    twoPlayers : boolean
+}
 
 
-
-export const GameCom = () => {
+export const GameCom = ({twoPlayers}: gameInfo) => {
     const speed: number = 1;
     const boardSize: number = 55;
-
-    const [gameInstance] = useState(() => new game(boardSize, speed));
+    const [gameInstance] = useState(() => new game(boardSize, speed,twoPlayers));
     const [entities, setEntities] = useState(() => gameInstance.getEntities());
 
     const renderRequestRef = useRef<number | null>(null);
@@ -46,7 +47,7 @@ export const GameCom = () => {
         snakes: entities.snakes,
         notifyUpdate: scheduleRender,
         moveInterval: 100,
-        twoPlayers: entities.snakes.length ===2
+        twoPlayers: twoPlayers
     });
 
     

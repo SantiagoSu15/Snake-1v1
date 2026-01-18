@@ -19,24 +19,32 @@ export class game{
     private fruits : fruit[];
     private boardSize : number;
     private collisionManager : collisionController;
+    private multiplayer:boolean;
 
-    constructor(boardSize:number,speed:number){
+    constructor(boardSize:number,speed:number,twoPlayers:boolean){
         this.system = new System();
         this.snakes = [];
         this.fruits = [];
         this.boardSize = boardSize;
         this.collisionManager = new collisionController(this.system);
+        this.multiplayer = twoPlayers;
+
         this.createInitial(speed)
+  
     }
 
     createInitial(speed:number){
         const snakeOne = new snake(this.system,{x:5,y:5},speed,this.boardSize);
+        let snakeTwo = null;
+        if (this.multiplayer) {
+            console.log("multi")
+            snakeTwo = new snake(this.system, { x: 25, y: 25 }, speed, this.boardSize);
+        }       
+        this.snakes.push(snakeOne);
 
-        
-
-        const snakeTwo = new snake(this.system,{x:25,y:25},speed,this.boardSize);
-       
-        this.snakes.push(snakeOne,snakeTwo);
+        if(snakeTwo !== null){
+            this.snakes.push(snakeTwo);
+        }
         for (let i = 0; i < 3; i++) {
             this.spawnFruit();
         }

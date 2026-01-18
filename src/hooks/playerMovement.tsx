@@ -8,12 +8,12 @@ type SnakeMovementProps = {
     snakes: snake[];
     notifyUpdate: () => void;
     moveInterval: number; // tiempo entre movimientos (ms)
-    twoPlayers?: boolean;
+    twoPlayers: boolean;
 };
 
 export const useSnakeMovement = ({snakes, notifyUpdate,moveInterval,twoPlayers}: SnakeMovementProps) => {
-    const player1Input = useInputDirection(false,true);
-    const player2Input = useInputDirection(true,true);
+    const player1Input = useInputDirection(false,twoPlayers);
+    const player2Input = useInputDirection(true,twoPlayers);
 
     const player1InputRef = useRef(player1Input);
     const player2InputRef = useRef(player2Input);

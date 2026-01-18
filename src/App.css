@@ -93,3 +93,83 @@ body{
     border-radius: 50%;
     aspect-ratio: 1 / 1;
   }
+
+  .Menu{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 80vh;
+    aspect-ratio: 1/1;
+    place-items: center;
+  }
+
+  .MenuButtoms{
+    width: 70vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .MenuButtoms a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .MenuButtoms a:hover,
+  .MenuButtoms a:focus,
+  .MenuButtoms a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+ 
+
+  .ModeMenuButton{
+    cursor: pointer;
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+
+    gap: 5%;
+  }
+  
+  .ModeMenuButton:hover,
+  .ModeMenuButton:focus,
+  .ModeMenuButton:active {
+    background: transparent;
+    outline: none;
+  }
+  
+  
+  
+
+  .iconButtonMenu {
+    width: 80%;
+    height: 70%;
+    background-image: url('/serpiente_static.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-image 0.3s;
+    }
+
+  .iconButtonMenu:hover {
+      background-image: url('/serpiente.gif');
+  }
+
+
+  .atribucion {
+    font-size: 6px;
+    color: #555;      
+    opacity: 0.4;      
+    text-align: center; 
+    margin-top: 20px;   
+  }
+  
