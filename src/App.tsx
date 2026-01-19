@@ -12,9 +12,11 @@ const routes = [
 ]
 
 
+
 function App() {
 
   return (
+    //<MensajePartida mensaje={"Ganaste"}/>
     <BrowserRouter>
       <Routes>
         {routes.map((route,index)=>(

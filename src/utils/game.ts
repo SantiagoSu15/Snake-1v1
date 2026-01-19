@@ -12,6 +12,10 @@ export type entities = {
     fruits: fruit[]
 }
 
+export type resultGame ={
+    gameEntities:  entities,
+    gameResult: boolean
+};
 
 export class game{
     private system : System;
@@ -78,7 +82,19 @@ export class game{
         return ent;
     }
 
-    update(): entities {
+    getSnakesNumber(){
+        return this.snakes.length;
+    }
+
+    checkFinal(size : number) : boolean{
+        if(this.snakes.length === size) return false;
+
+        return true;
+    }
+
+    update(): resultGame {
+        const numberSnakes : number = this.getSnakesNumber();
+
         this.spawnFruit();
         this.collisionManager.update();
     
@@ -102,6 +118,8 @@ export class game{
     
         this.snakes = this.snakes.filter(s => !s.getIsDead());
     
-        return this.getEntities();
+
+        
+        return {gameEntities: this.getEntities(),gameResult: this.checkFinal(numberSnakes)}
     }
 }
