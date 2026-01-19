@@ -12,10 +12,11 @@ export const Menu = ()=>{
                     </button>
                 </Link>
                 <Link to="/Snake-1v1/Multi-local">
-                    <button className='ModeMenuButton'>
+                <button className='ModeMenuButton'>
                         <div className="iconButtonMenu" id="LocalButton" />
                         <span> Multi Local</span> 
                     </button>
+                    
                 </Link>
                 <Link to="/Snake-1v1/Multi-online">
                     <button className='ModeMenuButton'>
