@@ -42,7 +42,7 @@ export class game{
         let snakeTwo = null;
         if (this.multiplayer) {
             console.log("multi")
-            snakeTwo = new snake(this.system, { x: 25, y: 25 }, speed, this.boardSize);
+            snakeTwo = new snake(this.system, { x: 20, y: 20 }, speed, this.boardSize);
         }       
         this.snakes.push(snakeOne);
 
@@ -64,8 +64,8 @@ export class game{
        
         if(randomNumber > 5){
             for(let i=0;i<randomFruitNumber;i++){
-                const randomVectorX = Math.floor(Math.random() * (this.boardSize- 0 + 1)) + 0;
-                const randomVectorY = Math.floor(Math.random() * (this.boardSize- 0 + 1)) + 0;
+                const randomVectorX = Math.floor(Math.random() * (this.boardSize- 0 + 1 -1)) + 0;
+                const randomVectorY = Math.floor(Math.random() * (this.boardSize- 0 + 1-1)) + 0;
         
                 const fruit = new manzana(this.system,{x:randomVectorX,y:randomVectorY})
                 this.fruits.push(fruit);
