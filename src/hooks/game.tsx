@@ -14,7 +14,7 @@ export type gameInfo ={
 
 export const GameCom = ({twoPlayers}: gameInfo) => {
     const speed: number = 1;
-    const boardSize: number = 55;
+    const boardSize: number = 25;
     const [gameInstance,setGameInstance] = useState(() => new game(boardSize, speed,twoPlayers));
     const [entities, setEntities] = useState(() => gameInstance.getEntities());
     const [gameOver,setGameOver] = useState(false);

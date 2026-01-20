@@ -167,7 +167,14 @@ export class snake implements Movible{
       return this.movecontroller.velocity;
     }
 
-   
+    getTailPosition():(Vector | null){
+      if(this.body?.tail?.value.x && this.body?.tail?.value.y){
+        const x :number = this.body?.tail?.value.x;
+        const y = this.body?.tail?.value.y;
+        return {x,y}
+      }
+      return null
+    }
 
     update(direction: Vector, d:number):void{
       this.move(direction,d);
