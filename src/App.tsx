@@ -4,6 +4,7 @@ import { Menu } from './components/pages/menu';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { Singleplayer } from './components/pages/Singleplayer';
 import { MultiplayerLocal } from './components/pages/MultiplayerLocal';
+import { Nubes } from './components/nube';
 
 const routes = [
   {path:"/Snake-1v1",element:<Menu /> },
@@ -18,6 +19,7 @@ function App() {
   return (
     //<MensajePartida mensaje={"Ganaste"}/>
     <BrowserRouter>
+      <Nubes />
       <Routes>
         {routes.map((route,index)=>(
             <Route key = {index} path = {route.path} element = {route.element} />
