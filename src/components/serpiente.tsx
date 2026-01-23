@@ -21,19 +21,18 @@ const SnakeComponent = ({ snake, size }: sProps) => {
     const headPos: Vector = { ...snake.getPosition() };
     const sizeCell: number = 100 / size;
     
-    const prevHeadPos = useRef<Vector>(headPos);
+    const prevHeadPos = useRef<Vector>({ x: headPos.x, y: headPos.y });
     
-    useEffect(() => {
-        prevHeadPos.current = headPos;
-    },[headPos]);
-
     const headDirection = {
         x: headPos.x - prevHeadPos.current.x,
         y: headPos.y - prevHeadPos.current.y
     };
 
     const headRotation = getRotation(headDirection);
-   
+    
+    useEffect(() => {
+        prevHeadPos.current = { x: headPos.x, y: headPos.y };
+    }, [headPos.x, headPos.y]);
 
     return (
         <>

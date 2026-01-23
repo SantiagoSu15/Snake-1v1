@@ -1,79 +1,108 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-export const useInputDirection = (secondPLayer:boolean,twoPlayers:boolean) => {
+
+type PlayerConfi = {
+  up: string,
+  down: string,
+  left: string,
+  right: string
+};
+
+
+
+const Player_Configs: Record<string,PlayerConfi> ={
+  player1: {
+      up: 'w',
+      down: 's',
+      left: 'a',
+      right: 'd',
+    },
+    player2: {
+      up: 'arrowup',
+      down: 'arrowdown',
+      left: 'arrowleft',
+      right: 'arrowright',
+    },
+}
+
+
+
+
+export const useInputDirection = (playerConfi:string,mode:string, resetKey?: number) => {
   const [directionValue, setDirection] = useState({ x: 0, y: 0 });
   const keyDic = useRef<Record<string, boolean>>({});
-  const activeKey = useRef<string | null >(null);
+  const lastValidKey = useRef<string | null>(null);
 
+  const config = Player_Configs[playerConfi];
+
+  useEffect(() => {
+    if (resetKey !== undefined) {
+      setDirection({ x: 0, y: 0 });
+      keyDic.current = {};
+      lastValidKey.current = null;
+    }
+  }, [resetKey]);
 
   const update = useCallback(() => {
     const direction = { x: 0, y: 0 };
 
-    const up    = secondPLayer ? 'arrowup'    : 'w';
-    const down  = secondPLayer ? 'arrowdown'  : 's';
-    const left  = secondPLayer ? 'arrowleft'  : 'a';
-    const right = secondPLayer ? 'arrowright' : 'd';
+    const key = lastValidKey.current;
 
+    const allKeys = (mode === "Single") ? Object.values(Player_Configs) : [config]
 
-    if (!twoPlayers) {
-      if (keyDic.current['w'] || keyDic.current['arrowup']) direction.x = -1;
-      if (keyDic.current['s'] || keyDic.current['arrowdown']) direction.x = 1;
-      if (keyDic.current['a'] || keyDic.current['arrowleft']) direction.y = -1;
-      if (keyDic.current['d'] || keyDic.current['arrowright']) direction.y = 1;
-    } else {
-      if (keyDic.current[up]) direction.x = -1;
-      if (keyDic.current[down]) direction.x = 1;
-      if (keyDic.current[left]) direction.y = -1;
-      if (keyDic.current[right]) direction.y = 1;
+    for(const playerKeys of allKeys){
+      if (key === playerKeys.up) direction.x = -1;
+      else if (key === playerKeys.down) direction.x = 1;
+      else if (key === playerKeys.left) direction.y = -1;
+      else if (key === playerKeys.right) direction.y = 1;
+      
+      if (direction.x !== 0 || direction.y !== 0) break;
     }
 
-      
     setDirection(direction);
     
 
     
-  }, [twoPlayers, secondPLayer]);
+  }, [config, mode]);
 
   useEffect(() => {
+    const validKeys = Object.values(config);
+    
+    const allValidKeys = mode === 'Single'
+      ? Object.values(Player_Configs).flatMap(c => Object.values(c))
+      : validKeys; 
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      const keys = ['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'];
       const key = e.key.toLowerCase();
-      
-      if(activeKey.current !== key && keys.includes(key) && activeKey.current !== null){
-        keyDic.current[activeKey.current] = false;
-        keyDic.current[key] = true;
-        activeKey.current = key;
-      }
 
+      if (!allValidKeys.includes(key)) return;
       if (e.repeat) return; 
+      e.preventDefault();
 
-      
-      if (keys.includes(key)) {
-        e.preventDefault();
-      }
-      //console.log('Key pressed:', key, 'Current keys:', keyDic.current);
+      const isValidForThisPlayer = validKeys.includes(key);
+      if (mode === 'multi' && !isValidForThisPlayer) return;
 
-      activeKey.current = key;
+
+
       keyDic.current[key] = true;
-     
-
+      lastValidKey.current = key;
       update();
        
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
-      //console.log('Key released:', key, 'Current keys:', keyDic.current);
       if (keyDic.current[key]) {
         keyDic.current[key] = false;
-        activeKey.current = null;
+      };
 
-        update();
-      }};
+
+
+    };
    
 
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    //window.addEventListener('keyup', handleKeyUp);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);

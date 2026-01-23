@@ -1,7 +1,9 @@
 import { useGameLoop } from "./gameLoop";
-import type { snake } from "../utils/Serpiente/snake";
+import { snake } from "../utils/Serpiente/snake";
 import { useInputDirection } from "./inputDirection";
 import { useEffect, useRef } from "react";
+
+type gameMode = "Single" | "Multiplayer"
 
 
 type SnakeMovementProps = {
@@ -9,11 +11,14 @@ type SnakeMovementProps = {
     notifyUpdate: () => void;
     moveInterval: number; // tiempo entre movimientos (ms)
     twoPlayers: boolean;
+    gameKey?: number; // Key que cambia al reiniciar el juego
 };
 
-export const useSnakeMovement = ({snakes, notifyUpdate,moveInterval,twoPlayers}: SnakeMovementProps) => {
-    const player1Input = useInputDirection(false,twoPlayers);
-    const player2Input = useInputDirection(true,twoPlayers);
+export const useSnakeMovement = ({snakes, notifyUpdate,moveInterval,twoPlayers, gameKey}: SnakeMovementProps) => {
+    const mode : gameMode = twoPlayers ? 'Multiplayer' : 'Single';
+
+    const player1Input = useInputDirection('player1', mode, gameKey);
+    const player2Input = useInputDirection('player2', mode, gameKey);
 
     const player1InputRef = useRef(player1Input);
     const player2InputRef = useRef(player2Input);

@@ -19,6 +19,7 @@ export const GameCom = ({twoPlayers}: gameInfo) => {
     const [entities, setEntities] = useState(() => gameInstance.getEntities());
     const [gameOver,setGameOver] = useState(false);
     const [finalMessage,setFinalMessage] = useState("");
+    const [gameKey, setGameKey] = useState(0); // Key que solo cambia al reiniciar
     const renderRequestRef = useRef<number | null>(null);
     const lastRenderTime = useRef(0);
     const MIN_RENDER_INTERVAL = 1000 / 30; 
@@ -57,7 +58,8 @@ export const GameCom = ({twoPlayers}: gameInfo) => {
         snakes: entities.snakes,
         notifyUpdate: scheduleRender,
         moveInterval: 100,
-        twoPlayers: twoPlayers
+        twoPlayers: twoPlayers,
+        gameKey: gameKey
     });
 
     
@@ -78,6 +80,7 @@ export const GameCom = ({twoPlayers}: gameInfo) => {
         setEntities(newGame.getEntities());
         setGameOver(false);
         setFinalMessage("");
+        setGameKey(prev => prev + 1); 
         lastRenderTime.current = 0;
     };
     
@@ -89,6 +92,7 @@ export const GameCom = ({twoPlayers}: gameInfo) => {
                 <MensajePartida mensaje={finalMessage}  onReset={resetGame} onMenu={() => navigate("/Snake-1v1")} />
             ) : (
                 <TableroComponent
+                     key={gameKey}
                     snakeList={entities.snakes}
                     fruitList={entities.fruits}
                     size={boardSize}
