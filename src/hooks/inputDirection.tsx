@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 export const useInputDirection = (secondPLayer:boolean,twoPlayers:boolean) => {
   const [directionValue, setDirection] = useState({ x: 0, y: 0 });
   const keyDic = useRef<Record<string, boolean>>({});
-
+  const activeKey = useRef<string | null >(null);
 
 
   const update = useCallback(() => {
@@ -36,19 +36,29 @@ export const useInputDirection = (secondPLayer:boolean,twoPlayers:boolean) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      const keys = ['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'];
       const key = e.key.toLowerCase();
+      
+      if(activeKey.current !== key && keys.includes(key) && activeKey.current !== null){
+        keyDic.current[activeKey.current] = false;
+        keyDic.current[key] = true;
+        activeKey.current = key;
+      }
+
       if (e.repeat) return; 
 
       
-      if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(key)) {
+      if (keys.includes(key)) {
         e.preventDefault();
       }
       //console.log('Key pressed:', key, 'Current keys:', keyDic.current);
 
-      if (!keyDic.current[key]) {
-        keyDic.current[key] = true;
-        update();
-      }    
+      activeKey.current = key;
+      keyDic.current[key] = true;
+     
+
+      update();
+       
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
@@ -56,8 +66,11 @@ export const useInputDirection = (secondPLayer:boolean,twoPlayers:boolean) => {
       //console.log('Key released:', key, 'Current keys:', keyDic.current);
       if (keyDic.current[key]) {
         keyDic.current[key] = false;
+        activeKey.current = null;
+
         update();
-      }    };
+      }};
+   
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
